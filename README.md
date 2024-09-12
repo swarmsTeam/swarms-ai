@@ -19,3 +19,10 @@ Mansoura University has seen a rapid increase in the number of volunteer teams a
     - **Role**: Analyse event reviews to gauge student satisfaction and provide ratings.
     - **Functionality**: Automatically read and analyse comments to identify the sentiment (positive, negative, neutral) and provide a summary rating.
     - **Value Added**: Offers a reliable feedback mechanism, helping event organizers improve future events based on actual student feedback.
+
+
+## Contributing
+We welcome contributions to this project! Please see the `CONTRIBUTING.md` file  for guidelines on how to submit pull requests.
+
+## License 
+This project is licensed under the MIT License (see `LICENSE.md` for details).
