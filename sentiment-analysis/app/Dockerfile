@@ -1,5 +1,6 @@
-FROM pytorch/pytorch:2.4.1-cpu
+FROM pytorch/pytorch:latest
 
+WORKDIR /app
 
 COPY requirements.txt .
 
