@@ -1,4 +1,4 @@
-FROM python:3.12
+FROM pytorch/pytorch:2.4.1-cpu
 
 
 COPY requirements.txt .
