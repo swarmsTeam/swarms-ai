@@ -1,2 +1,4 @@
 .vscode/
 sentiment-analysis/app/__pycache__
+sentiment-analysis/app/.dockerignore
+.DS_Store
