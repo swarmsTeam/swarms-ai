@@ -22,7 +22,7 @@ Mansoura University has seen a rapid increase in the number of volunteer teams a
 
 
 ## Contributing
-We welcome contributions to this project! Please see the `CONTRIBUTING.md` file  for guidelines on how to submit pull requests.
+We welcome contributions to this project! Please see the `[CONTRIBUTING.md](https://github.com/swarmsTeam/swarms-ai/blob/main/CONTRIBUTING.md)` file  for guidelines on how to submit pull requests.
 
 ## License 
-This project is licensed under the MIT License (see `LICENSE.md` for details).
+This project is licensed under the MIT License (see `[LICENSE](https://github.com/swarmsTeam/swarms-ai/blob/main/LICENSE)` for details).
