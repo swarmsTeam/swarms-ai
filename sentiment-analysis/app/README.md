@@ -57,38 +57,12 @@ This endpoint accepts a **POST** request with event comments in **JSON** or **CS
 ### Example Request (JSON)
 
 ```bash
-curl -X POST http://localhost:5000/sentiment \\
--H "Content-Type: application/json" \\
+curl -X POST http://localhost:5000/sentiment \
+-H "Content-Type: application/json" \
 -d '{
-  "data": [
-    {"event_id": "123", "comment": "The event was fantastic, very engaging!"},
-    {"event_id": "123", "comment": "Could have been more organized."},
-    {"event_id": "124", "comment": "Had a great time, well done!"},
-    {"event_id": "124", "comment": "Not worth the time."}
-  ]
+    "event_id": [1, 1, 2],
+    "comments": ["الايفنت كان روعة وكل حاجة كانت قمة في الجمال", "روعة", "مش حلو خالص"]
 }'
-```
-
-### Example Request (CSV)
-
-To send a CSV file, you can use a tool like Postman, or you can upload it programmatically.
-
-Here’s an example using `curl`:
-
-```bash
-curl -X POST http://localhost:5000/sentiment \\
--H "Content-Type: text/csv" \\
---data-binary @comments.csv
-```
-
-In this example, `comments.csv` should look like:
-
-```
-event_id,comment
-123,The event was fantastic, very engaging!
-123,Could have been more organized.
-124,Had a great time, well done!
-124,Not worth the time.
 ```
 
 ### Response
@@ -98,12 +72,7 @@ The response will include the star ratings for each unique `event_id` based on t
 - **Success (200)**:
 
 ```json
-{
-  "ratings": {
-    "123": 4.2,
-    "124": 3.5
-  }
-}
+{"1":2.5,"2":2.5}
 ```
 
 - **Error (400)**: If there is an issue with the request, such as missing fields or incorrect formatting.
