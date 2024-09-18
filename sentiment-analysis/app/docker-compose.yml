@@ -1,9 +1,0 @@
-services:
-  event_review:
-    container_name: evnto_sentiment
-    image: swarms/evnto_sentiment
-    ports:
-      - "5000:5000"
-    build: 
-      context: .
-      dockerfile: Dockerfile
