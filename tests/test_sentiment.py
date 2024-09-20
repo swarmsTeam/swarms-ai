@@ -6,14 +6,14 @@ client = TestClient(app)
 def test_sentiment_with_json():
     # Test case for valid JSON input
     response = client.post(
-        "/api/v1/sentiment",
+        "/sentiment",  # Update the endpoint path if needed
         json={"comments": ["This event was great!", "I didn't like it."], "event_id": [1, 1]}
     )
     assert response.status_code == 200
     result = response.json()
     assert isinstance(result, dict)  # The result should be a dictionary
     assert "1" in result  # Event ID 1 should be in the response
-
+    
 def test_sentiment_with_invalid_json():
     # Test case for invalid JSON input
     response = client.post(
