@@ -1,5 +1,6 @@
 from transformers import pipeline
 import pandas as pd
+import json
 
 # Load the pre-trained sentiment analysis model
 MODEL = "CAMeL-Lab/bert-base-arabic-camelbert-da-sentiment"
@@ -39,5 +40,4 @@ def calculate_ratings(data: pd.DataFrame) -> pd.Series:
 
     # Calculate star rating
     grouped['star_rating'] = grouped['total_score'] / (grouped['length'] / 5)
-
     return grouped['star_rating']
