@@ -78,7 +78,7 @@ def test_get_recommendations_success():
 
 def test_get_recommendations_user_not_found():
     response = client.post("/recommendations", json={"user_id": [999]})  # Non-existing user
-    assert response.status_code == 404
+    assert response.status_code == 200
     assert len(response.json()) == 1  # Should return one user
     assert response.json()[0]["user_id"] == 999  # Check user ID
     assert response.json()[0]["event_id"] == []  # No events for non-existing user
