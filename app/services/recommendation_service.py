@@ -13,7 +13,7 @@ class RecommendationService:
     @staticmethod
     def filter_active_events(events):
         events_df = pd.DataFrame(events)
-        return events_df[events_df['status'] != 'ended']
+        return events_df[events_df['status'] != 'passed']
 
     @staticmethod
     def generate_event_embeddings(events_df):
