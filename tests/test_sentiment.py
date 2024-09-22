@@ -17,7 +17,7 @@ def test_sentiment_with_json():
 def test_sentiment_with_invalid_json():
     # Test case for invalid JSON input
     response = client.post(
-        "/api/v1/sentiment",
+        "/sentiment",
         json={"comments": ["Good"], "invalid_field": [1]}
     )
     assert response.status_code == 400
@@ -27,7 +27,7 @@ def test_sentiment_with_csv():
     # Test case for valid CSV input
     file_content = "comments,event_id\n'Good event',1\n'Bad event',1"
     response = client.post(
-        "/api/v1/sentiment",
+        "/sentiment",
         files={"file": ("test.csv", file_content, "text/csv")}
     )
     assert response.status_code == 200
@@ -37,7 +37,7 @@ def test_sentiment_with_csv():
 def test_invalid_content_type():
     # Test case for unsupported content type
     response = client.post(
-        "/api/v1/sentiment",
+        "/sentiment",
         data="Unsupported content type"
     )
     assert response.status_code == 400
