@@ -1,15 +1,10 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
-from typing import List
-import pandas as pd
 from app.services import calculate_ratings
-from pydantic import BaseModel
+from app.models import SentimentRequest
+import pandas as pd
 
 # Create a router for sentiment-related endpoints
 router = APIRouter()
-
-class SentimentRequest(BaseModel):
-    event_id: List[int]
-    comments: List[str]
 
 @router.post("/sentiment")
 async def sentiment(request_data: SentimentRequest = None):
