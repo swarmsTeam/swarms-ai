@@ -1,9 +1,9 @@
 import os
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.vectorstores import FAISS
 from langchain.chains import RetrievalQA
-from langchain.document_loaders import JSONLoader
+from langchain_community.document_loaders import JSONLoader
+from langchain_community.vectorstores import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 # Set up the environment for the API key
