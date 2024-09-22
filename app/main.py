@@ -11,7 +11,7 @@ app = FastAPI(
 # Include the routers for the API endpoints
 app.include_router(sentiment.router, tags=["Sentiment Analysis"])
 app.include_router(chatbot.router, tags=["Chatbot"])
-#app.include_router(recommendation.router, tags=["Recommendation System"])
+app.include_router(recommendation.router, tags=["Recommendation System"])
 
 # Root endpoint for health check
 @app.get("/", tags=["Health Check"])

@@ -1,2 +1,3 @@
 from .sentiment_service import calculate_ratings
 from .chatbot_service import process_chatbot_query
+from .recommendation_service import RecommendationService
