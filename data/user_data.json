@@ -1,0 +1,14 @@
+[
+{"id": 1, 
+"college_name": "Engineering", 
+"user_skill": "machine learning", 
+"user_interests": "AI, tech"
+}, 
+
+{
+    "id": 2, 
+"college_name": "Business", 
+"user_skill": "finance", 
+"user_interests": "economics, startups"
+}
+]
