@@ -16,7 +16,11 @@ model = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
 # Load event data
 events = DataRetriever.get_events()
-loader = JSONLoader(file_path=None, data=events, jq_schema='.[] | {name, description, type, category, rating, goals}', text_content=False)
+loader = JSONLoader(
+    file_path=None, data=events, 
+    jq_schema='.[] | {name, description, type, status, start_date, end_date, category, rating, goals}', 
+    text_content=False
+    )
 documents = loader.load()
 
 # Set up the vector store with embeddings
