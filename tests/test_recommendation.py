@@ -56,7 +56,7 @@ class MockDataLoader:
 # Test Cases
 @pytest.fixture(autouse=True)
 def override_data_loader(monkeypatch):
-    monkeypatch.setattr("app.data_loader.DataLoader", MockDataLoader)
+    monkeypatch.setattr("app.tools.DataLoader", MockDataLoader)
 
 def test_get_recommendations_success():
     response = client.post("/recommendations", json={"user_id": [1, 2]})
