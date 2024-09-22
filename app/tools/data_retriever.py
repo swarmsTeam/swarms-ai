@@ -14,7 +14,7 @@ class DataRetriever:
         try:
             response = requests.get(url)
             response.raise_for_status()
-            return response.json()
+            return response.json().get("data", [])
         except requests.HTTPError as http_err:
             print(f"HTTP error occurred: {http_err}")
         except requests.ConnectionError:
