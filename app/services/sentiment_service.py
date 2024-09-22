@@ -40,4 +40,6 @@ def calculate_ratings(data: pd.DataFrame) -> pd.Series:
 
     # Calculate star rating
     grouped['star_rating'] = grouped['total_score'] / (grouped['length'] / 5)
+    grouped['star_rating'] = grouped['star_rating'].round(2)
+
     return grouped['star_rating']
