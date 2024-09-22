@@ -13,11 +13,11 @@ async def sentiment(request_data: SentimentRequest = None):
         raise HTTPException(status_code=400, detail="Please provide JSON data.")
 
     # Load the data from the JSON request
-    data = pd.DataFrame({'event_id': request_data.event_id, 'comments': request_data.comments})
+    data = pd.DataFrame({'event_id': request_data.event_id, 'description': request_data.description})
 
-    # Ensure 'comments' and 'event_id' columns exist
-    if 'comments' not in data.columns or 'event_id' not in data.columns:
-        raise HTTPException(status_code=400, detail="Missing required columns: comments, event_id")
+    # Ensure 'description' and 'event_id' columns exist
+    if 'description' not in data.columns or 'event_id' not in data.columns:
+        raise HTTPException(status_code=400, detail="Missing required columns: description, event_id")
 
     # Call the service to calculate the ratings
     ratings = calculate_ratings(data)

@@ -5,5 +5,5 @@ class SentimentRequest(BaseModel):
     """
     Model for validating sentiment analysis request.
     """
-    comments: List[str]
+    description: List[str]
     event_id: List[int]

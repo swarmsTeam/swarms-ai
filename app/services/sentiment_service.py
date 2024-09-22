@@ -8,10 +8,10 @@ pipe = pipeline("text-classification", model=MODEL)
 
 def calculate_ratings(data: pd.DataFrame) -> pd.Series:
     """
-    Calculate sentiment ratings based on comments and group them by event_id.
+    Calculate sentiment ratings based on description and group them by event_id.
     
     Args:
-        data (pd.DataFrame): Data containing 'comments' and 'event_id'.
+        data (pd.DataFrame): Data containing 'description' and 'event_id'.
     
     Returns:
         pd.Series: The star ratings grouped by event_id.
@@ -21,7 +21,7 @@ def calculate_ratings(data: pd.DataFrame) -> pd.Series:
 
     # Process each review and assign sentiment score
     for index, review in data.iterrows():
-        sentiment = pipe(review['comments'])[0]
+        sentiment = pipe(review['description'])[0]
         score = sentiment['score']
 
         # Adjust score based on sentiment label
@@ -40,6 +40,6 @@ def calculate_ratings(data: pd.DataFrame) -> pd.Series:
 
     # Calculate star rating
     grouped['star_rating'] = grouped['total_score'] / (grouped['length'] / 5)
-    grouped['star_rating'] = grouped['star_rating'].round(2)
+    grouped['star_rating'] = grouped['star_rating']
 
     return grouped['star_rating']
