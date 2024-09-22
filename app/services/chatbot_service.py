@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import RetrievalQA
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.document_loaders import JSONLoader
 from langchain_community.vectorstores import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -15,9 +15,8 @@ if "GOOGLE_API_KEY" not in os.environ:
 model = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
 # Load event data
-events = DataRetriever.get_events()
 loader = JSONLoader(
-    file_path=None, data=events, 
+    file_path="data/event_data.json",
     jq_schema='.[] | {name, description, type, status, start_date, end_date, category, rating, goals}', 
     text_content=False
     )
