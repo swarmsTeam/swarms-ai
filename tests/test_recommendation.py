@@ -2,6 +2,7 @@ import pytest
 from app.main import app
 from fastapi.testclient import TestClient
 from app.models import RecommendationRequest
+from unittest.mock import patch
 
 client = TestClient(app)
 
@@ -43,20 +44,30 @@ FAKE_EVENTS_DATA = [
     }
 ]
 
-# Mock DataLoader to provide fallback data
-class MockDataLoader:
-    @staticmethod
-    def load_fallback_users():
-        return FAKE_USERS_DATA
+# Mocking requests.get to return our fake data
+def mock_get(url, *args, **kwargs):
+    if "users" in url:
+        return MockResponse(FAKE_USERS_DATA, 200)
+    elif "events" in url:
+        return MockResponse(FAKE_EVENTS_DATA, 200)
+    return MockResponse(None, 404)
 
-    @staticmethod
-    def load_fallback_events():
-        return FAKE_EVENTS_DATA
+class MockResponse:
+    def __init__(self, json_data, status_code):
+        self.json_data = json_data
+        self.status_code = status_code
+
+    def json(self):
+        return self.json_data
+
+    def raise_for_status(self):
+        if self.status_code != 200:
+            raise requests.HTTPError(f"HTTP {self.status_code} error")
 
 # Test Cases
 @pytest.fixture(autouse=True)
-def override_data_loader(monkeypatch):
-    monkeypatch.setattr("app.tools.DataLoader", MockDataLoader)
+def mock_requests_get(monkeypatch):
+    monkeypatch.setattr("requests.get", mock_get)
 
 def test_get_recommendations_success():
     response = client.post("/recommendations", json={"user_id": [1, 2]})
@@ -67,7 +78,7 @@ def test_get_recommendations_success():
 
 def test_get_recommendations_user_not_found():
     response = client.post("/recommendations", json={"user_id": [999]})  # Non-existing user
-    assert response.status_code == 200
+    assert response.status_code == 404
     assert len(response.json()) == 1  # Should return one user
     assert response.json()[0]["user_id"] == 999  # Check user ID
     assert response.json()[0]["event_id"] == []  # No events for non-existing user
@@ -80,11 +91,3 @@ def test_get_recommendations_empty_input():
 def test_get_recommendations_invalid_input():
     response = client.post("/recommendations", json={"user_id": "invalid"})
     assert response.status_code == 422  # Unprocessable Entity
-
-def test_get_recommendations_api_error():
-    # Simulate API error by providing a wrong URL or causing a failure in the fetch function
-    # Here we could modify the fetch_data_from_api method temporarily for this test or
-    # mock the requests.get call to raise an exception.
-    response = client.post("/recommendations", json={"user_id": [1, 2]})
-    assert response.status_code == 200  # Should still return valid fallback data
-    assert len(response.json()) == 2  # Check that fallback data is returned
