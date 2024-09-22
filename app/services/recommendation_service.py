@@ -50,7 +50,8 @@ class RecommendationService:
         for user_id in user_ids:
             user = next((u for u in users if u['id'] == user_id), None)
             if not user:
-                raise ValueError(f"User with id {user_id} not found")
+                recommendations.append({"user_id": user_id, "event_id": []})
+                continue
             recommended_events = RecommendationService.recommend_events_for_user(user, event_embeddings, events_df)
             recommendations.append({"user_id": user_id, "event_id": recommended_events})
 
